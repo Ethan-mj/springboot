@@ -1,6 +1,6 @@
 package com.zeasn.whitelist.service;
 
-import com.zeasn.whitelist.dao.domain.User;
+import com.zeasn.whitelist.dao.entity.User;
 
 import java.util.List;
 

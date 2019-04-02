@@ -1,6 +1,6 @@
 package com.zeasn.whitelist.service.impl;
 
-import com.zeasn.whitelist.dao.domain.User;
+import com.zeasn.whitelist.dao.entity.User;
 import com.zeasn.whitelist.dao.mapper.UserMapper;
 import com.zeasn.whitelist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
