@@ -35,7 +35,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/loginUser", "anon");
         filterChainDefinitionMap.put("/client/test", "anon");
         filterChainDefinitionMap.put("/user/getUser", "anon");//添加白名单
-        filterChainDefinitionMap.put("/assert/get", "anon");//添加白名单
+        filterChainDefinitionMap.put("/resource", "anon");//添加白名单
         filterChainDefinitionMap.put("/assert/assertQuery", "anon");//添加白名单
         filterChainDefinitionMap.put("/a", "anon");
         filterChainDefinitionMap.put("/book/list", "anon");
