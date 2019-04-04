@@ -19,19 +19,6 @@
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
         <!-- 带上序列化接口 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
-        <!-- 自定义的注释生成插件-->
-        <plugin type="com.chrm.mybatis.generator.plugins.CommentPlugin">
-            <!-- 抑制警告 -->
-            <property name="suppressTypeWarnings" value="true" />
-            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressAllComments" value="false" />
-            <!-- 是否生成注释代时间戳-->
-            <property name="suppressDate" value="true" />
-        </plugin>
-        <!--&lt;!&ndash; 整合lombok&ndash;&gt;-->
-        <!--<plugin type="com.chrm.mybatis.generator.plugins.LombokPlugin" >-->
-            <!--<property name="hasLombok" value="true"/>-->
-        <!--</plugin>-->
         <!-- 注释 -->
         <commentGenerator>
             <!-- 是否生成注释代时间戳 -->

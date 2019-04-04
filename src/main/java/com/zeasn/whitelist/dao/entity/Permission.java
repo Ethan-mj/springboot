@@ -1,28 +1,27 @@
 package com.zeasn.whitelist.dao.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 
-/**
- * Table: permission
- */
 public class Permission implements Serializable {
-    /**
-     * Table:     permission
-     * Column:    pid
-     * Nullable:  false
-     */
     @Id
     private Long pid;
 
-    /**
-     * Table:     permission
-     * Column:    name
-     * Nullable:  true
-     */
-    private String name;
+    private String pname;
 
     private static final long serialVersionUID = 1L;
+
+    @Transient
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     /**
      * @return pid
@@ -39,16 +38,16 @@ public class Permission implements Serializable {
     }
 
     /**
-     * @return name
+     * @return pname
      */
-    public String getName() {
-        return name;
+    public String getPname() {
+        return pname;
     }
 
     /**
-     * @param name
+     * @param pname
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setPname(String pname) {
+        this.pname = pname;
     }
 }

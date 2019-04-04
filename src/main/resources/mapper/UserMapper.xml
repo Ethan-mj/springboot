@@ -1,19 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zeasn.whitelist.dao.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.zeasn.whitelist.dao.entity.User">
-    <result column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zeasn.whitelist.dao.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zeasn.whitelist.dao.entity.User" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
   </resultMap>
 
-
-  <!-- ### 以上代码由MBG + CommentPlugin自动生成, 生成时间: 2019-04-03 16:47:55 ### -->
-
-  <select id="getAllUser" resultMap="BaseResultMap">
-        SELECT * FROM USER ;
+  <resultMap type="com.zeasn.whitelist.dao.entity.User" id="userMap">
+    <id property="uid" column="uid"/>
+    <result property="uname" column="uname"/>
+    <result property="password" column="password"/>
+    <collection property="roles" ofType="com.zeasn.whitelist.dao.entity.Role">
+      <id property="rid" column="rid"/>
+      <result property ="rname" column="rname"/>
+      <collection property="permissions" ofType="com.zeasn.whitelist.dao.entity.Permission">
+        <id property="pid" column="pid"/>
+        <result property="pname" column="pname"/>
+      </collection>
+    </collection>
+  </resultMap>
+  <select id="findByName" parameterType="string" resultMap="userMap">
+        SELECT u.*,r.*,p.* FROM user u inner join user_role ur on ur.uid=u.uid
+        inner join role r on r.rid=ur.rid
+        inner join role_permission rp on rp.rid=r.rid
+        inner join permission p on rp.pid=p.pid
+        WHERE uname=#{name};
     </select>
-
-  <!-- Your codes goes here!!! -->
-  
 </mapper>

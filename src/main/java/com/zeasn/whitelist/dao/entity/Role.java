@@ -1,28 +1,39 @@
 package com.zeasn.whitelist.dao.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
-/**
- * Table: role
- */
 public class Role implements Serializable {
-    /**
-     * Table:     role
-     * Column:    rid
-     * Nullable:  false
-     */
     @Id
     private Long rid;
 
-    /**
-     * Table:     role
-     * Column:    name
-     * Nullable:  true
-     */
-    private String name;
+    private String rname;
 
     private static final long serialVersionUID = 1L;
+
+    @Transient
+    private Set<User> users = new HashSet<>();
+
+    @Transient
+    private Set<Permission> permissions = new HashSet<>();
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
 
     /**
      * @return rid
@@ -39,16 +50,16 @@ public class Role implements Serializable {
     }
 
     /**
-     * @return name
+     * @return rname
      */
-    public String getName() {
-        return name;
+    public String getRname() {
+        return rname;
     }
 
     /**
-     * @param name
+     * @param rname
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setRname(String rname) {
+        this.rname = rname;
     }
 }

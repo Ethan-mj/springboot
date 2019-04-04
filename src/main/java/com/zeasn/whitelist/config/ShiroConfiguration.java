@@ -1,19 +1,25 @@
 package com.zeasn.whitelist.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import com.zeasn.whitelist.dao.entity.Permission;
+import com.zeasn.whitelist.dao.mapper.PermissionMapper;
 import com.zeasn.whitelist.shiro.AuthRealm;
 import com.zeasn.whitelist.shiro.CredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import tk.mybatis.mapper.util.StringUtil;
 
 /**
  * shiro的配置类
@@ -22,29 +28,23 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
  */
 @Configuration
 public class ShiroConfiguration {
+
     @Bean(name="shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager manager) {
         ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
         bean.setSecurityManager(manager);
         //配置登录的url和登录成功的url
         bean.setLoginUrl("/login");
-        bean.setSuccessUrl("/home");
+        bean.setSuccessUrl("/index");
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login*", "anon"); //表示可以匿名访问
+        filterChainDefinitionMap.put("/static/**", "anon");// 不拦截静态资源
         filterChainDefinitionMap.put("/loginUser", "anon");
-        filterChainDefinitionMap.put("/client/test", "anon");
+        filterChainDefinitionMap.put("/login*", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("/user/getUser", "anon");//添加白名单
-        filterChainDefinitionMap.put("/resource", "anon");//添加白名单
-        filterChainDefinitionMap.put("/assert/assertQuery", "anon");//添加白名单
-        filterChainDefinitionMap.put("/a", "anon");
-        filterChainDefinitionMap.put("/book/list", "anon");
         filterChainDefinitionMap.put("/logout*","anon");
-        filterChainDefinitionMap.put("/jsp/error.jsp*","anon");
-        filterChainDefinitionMap.put("/jsp/login.jsp*","authc");
-        filterChainDefinitionMap.put("/*", "authc");//表示需要认证才可以访问
+
         filterChainDefinitionMap.put("/**", "authc");//表示需要认证才可以访问
-        filterChainDefinitionMap.put("/*.*", "authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
@@ -83,5 +83,9 @@ public class ShiroConfiguration {
         AuthorizationAttributeSourceAdvisor advisor=new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(manager);
         return advisor;
+    }
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
     }
 }

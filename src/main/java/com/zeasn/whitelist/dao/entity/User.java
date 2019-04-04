@@ -1,62 +1,56 @@
 package com.zeasn.whitelist.dao.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
-/**
- * Table: user
- */
 public class User implements Serializable {
-    /**
-     * Table:     user
-     * Column:    id
-     * Nullable:  false
-     */
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
-    private Long id;
+    private Long uid;
 
-    /**
-     * Table:     user
-     * Column:    name
-     * Nullable:  true
-     */
-    private String name;
+    private String uname;
 
-    /**
-     * Table:     user
-     * Column:    password
-     * Nullable:  true
-     */
     private String password;
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @return id
-     */
-    public Long getId() {
-        return id;
+    @Transient
+    private Set<Role> roles = new HashSet<>();
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     /**
-     * @param id
+     * @return uid
      */
-    public void setId(Long id) {
-        this.id = id;
+    public Long getUid() {
+        return uid;
     }
 
     /**
-     * @return name
+     * @param uid
      */
-    public String getName() {
-        return name;
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
     /**
-     * @param name
+     * @return uname
      */
-    public void setName(String name) {
-        this.name = name;
+    public String getUname() {
+        return uname;
+    }
+
+    /**
+     * @param uname
+     */
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
     /**

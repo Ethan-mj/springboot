@@ -28,8 +28,7 @@ public class UserCtrl {
         Page<User> page = new Page<>(1, 10);
 //        List<User> list = userMapper.selectList(page , qw);
         List<User> list = userMapper.selectAll();
-        userMapper.getAllUser();
-//        List<User> list = userMapper.s;
+        User user = userMapper.findByName("user1");
         return list;
     }
 }
