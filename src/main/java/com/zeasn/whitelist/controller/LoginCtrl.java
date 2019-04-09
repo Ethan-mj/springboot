@@ -1,7 +1,6 @@
 package com.zeasn.whitelist.controller;
 
 import com.alibaba.druid.util.StringUtils;
-import com.zeasn.whitelist.dao.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class LoginCtrl {
@@ -26,21 +23,21 @@ public class LoginCtrl {
     public String loginUser(String name, String password, HttpServletRequest request) {
         if (StringUtils.isEmpty(name)|| StringUtils.isEmpty(password)) {
             request.setAttribute("msg", "用户名或密码不能为空！");
-            return "redirect:/login";
+            return "/login";
         }
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token=new UsernamePasswordToken(name,password);
         try {
             subject.login(token);
-            return "redirect:/index";
+            return "/index";
         }catch (LockedAccountException lae) {
             token.clear();
             request.setAttribute("msg", "用户已经被锁定不能登录，请与管理员联系！");
-            return "redirect:/login";
+            return "/login";
         } catch (AuthenticationException e) {
             token.clear();
             request.setAttribute("msg", "用户或密码不正确！");
-            return "redirect:/login";
+            return "/login";
         }
 
     }

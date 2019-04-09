@@ -1,25 +1,19 @@
 package com.zeasn.whitelist.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import com.zeasn.whitelist.dao.entity.Permission;
-import com.zeasn.whitelist.dao.mapper.PermissionMapper;
 import com.zeasn.whitelist.shiro.AuthRealm;
 import com.zeasn.whitelist.shiro.CredentialsMatcher;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
-import java.util.List;
-
-import org.apache.shiro.spring.LifecycleBeanPostProcessor;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
-import org.apache.shiro.mgt.SecurityManager;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import tk.mybatis.mapper.util.StringUtil;
 
 /**
  * shiro的配置类
@@ -39,7 +33,7 @@ public class ShiroConfiguration {
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
         filterChainDefinitionMap.put("/static/**", "anon");// 不拦截静态资源
-        filterChainDefinitionMap.put("/loginUser", "anon");
+        filterChainDefinitionMap.put("swagger-ui.html", "anon");
         filterChainDefinitionMap.put("/login*", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("/user/getUser", "anon");//添加白名单
         filterChainDefinitionMap.put("/logout*","anon");

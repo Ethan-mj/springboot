@@ -8,8 +8,8 @@
 <ul>
     <button type="button"  onclick="search();" class="btn btn-primary">查询</button>
     <button shiro:hasPermission="add" type="button"  onclick="$('#addUser').modal();" class="btn btn-info" style="float: right; margin-right: 1px;">新增</button>
-    <button shiro:hasPermission="delete" type="button"  onclick="delByID();" class="btn btn-info" style="float: right; margin-right: 1px;">删除</button>
-    <button shiro:hasPermission="saveUserRoles" type="button"  onclick="allotRole();" class="btn btn-info" style="float: right; margin-right: 1px;">分配角色</button>
+    <button shiro:hasRole="delete" type="button"  onclick="delByID();" class="btn btn-info" style="float: right; margin-right: 1px;">删除</button>
+    <button shiro:hasRole="admin" type="button"  onclick="allotRole();" class="btn btn-info" style="float: right; margin-right: 1px;">分配角色</button>
 </ul>
 </body>
 </html>
