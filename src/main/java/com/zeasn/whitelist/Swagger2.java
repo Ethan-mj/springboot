@@ -47,7 +47,7 @@ public class Swagger2 {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Spring Boot中使用Swagger2构建RESTful APIs")
-                .description("简单优雅的restfun风格，http://blog.csdn.net/saytime")
+                .description("简单优雅的restfun风格")
                 .termsOfServiceUrl("http://blog.csdn.net/saytime")
                 .version("1.0")
                 .build();
