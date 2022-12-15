@@ -8,6 +8,7 @@ public class IndexCtrl {
 
     @RequestMapping("/index")
     public String index() {
+
         return "index";
     }
 }
