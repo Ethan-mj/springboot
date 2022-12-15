@@ -42,10 +42,9 @@ public class LoginCtrl {
 
     }
     @RequestMapping("/logOut")
-    public String logOut(HttpSession session) {
+    public String logOut() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-//        session.removeAttribute("user");
         return "login";
     }
 }
